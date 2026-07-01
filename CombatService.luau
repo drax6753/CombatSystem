@@ -236,7 +236,7 @@ local function applyKnockback(enemyEntity, enemyRoot, root)
 end
 
 -- Runs the punch logic when the punch lands
-local function resolvePunch(entity, hum, root, enemyEntity, enemyHum, enemyRoot, sound, part, punchStage)
+local function resolvePunch(entity, hum, root, enemyEntity, enemyHum, enemyRoot, punchStage)
 	-- We get the enemyEntity state and check if its knocked, if it is then we can't punch it.
 	if StateService:GetState(enemyEntity) == "Knocked" then
 		return
@@ -343,7 +343,6 @@ function CombatService.Punch(self: CombatService, entity: Model)
 
 	local punchStage = getPunchStage(entity) -- Get punch stage to use it for playing animations and knockbacks
 	local hits = getHitbox(entity, root) -- Get everything detected inside the hitbox
-	
 	-- Use for loop to loop in the hits and apply punch logic if we detected a target
 	for _, hit in hits do
 		local enemyEntity = hit:FindFirstAncestorOfClass("Model") -- Tries to find the model ancestor of the hit
